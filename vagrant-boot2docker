@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#Todo: add optional ip command which runs:
+# vagrant ssh ifconfig | grep -A 1 eth1 | grep "inet addr:"
+
+vagrant up
