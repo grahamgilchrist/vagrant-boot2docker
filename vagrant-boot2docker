@@ -1,5 +1,27 @@
 #!/bin/sh
 
+# Get the absolute path of this executable
+SELF_DIRNAME="`dirname -- "$0"`"
+SELF_PATH="`cd -P -- "$SELF_DIRNAME" && pwd -P`/`basename -- "$0"`"
+
+# Resolve symlinks - this is the equivalent of "readlink -f", but also works with non-standard OS X readlink.
+while [ -h "$SELF_PATH" ]; do
+    # 1) cd to directory of the symlink
+    # 2) cd to the directory of where the symlink points
+    # 3) Get the pwd
+    # 4) Append the basename
+    DIR="`dirname -- "$SELF_PATH"`"
+    SYM="`readlink $SELF_PATH`"
+    SYM_DIRNAME="`dirname -- "$SYM"`"
+    SELF_PATH="`cd "$DIR" && cd "$SYM_DIRNAME" && pwd`/`basename -- "$SYM"`"
+done
+
+
+SELF_DIRNAME="`dirname -- "$SELF_PATH"`"
+
+# change to package directory to run vagrantfile
+cd $SELF_DIRNAME
+
 #Todo: add optional ip command which runs:
 # vagrant ssh ifconfig | grep -A 1 eth1 | grep "inet addr:"
 
