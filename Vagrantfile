@@ -8,6 +8,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "yungsang/boot2docker"
   config.vm.box_check_update = false
   config.vm.network "private_network", ip: "192.168.33.10"
+  
+  # Pass common server ports back to host machine
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 9000, host: 9000
 
   # Mount current dir under same path in VM
   config.vm.synced_folder "/Users", "/Users", type: "nfs", mount_options: ["nolock", "vers=3", "udp"]
