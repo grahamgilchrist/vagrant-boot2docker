@@ -25,4 +25,5 @@ cd $SELF_DIRNAME
 #Todo: add optional ip command which runs:
 # vagrant ssh ifconfig | grep -A 1 eth1 | grep "inet addr:"
 
-vagrant up
+# Pass through the command to vagrant. e.g. vagrant-boot2docker up
+vagrant $1
